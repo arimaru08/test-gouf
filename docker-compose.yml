@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - ./my.cnf:/etc/mysql/my.cnf:ro  # カスタム設定ファイルをマウント
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: myapp_development
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_UNIX_PORT: /var/run/mysqld/mysqld.sock
+      # MYSQL_UNIX_PORT: /run/mysqld/mysqld.sock
+    ports:
+      - "3306:3306"
+    networks:
+      - myapp-network
+
+  web:
+    # image: ruby:3.1
+    build: '.'
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && rails s -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: db
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: myapp_development
+    depends_on:
+      - db
+    networks:
+      - myapp-network
+
+volumes:
+  db-data:
+
+networks:
+  myapp-network:
