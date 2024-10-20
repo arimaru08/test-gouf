@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2024_10_14_145926) do
-  create_table "products", force: :cascade do |t|
+  create_table "products", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
     t.string "image", null: false

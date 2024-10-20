@@ -2,15 +2,16 @@ services:
   db:
     image: mysql:8.0
     volumes:
-      - ./my.cnf:/etc/mysql/my.cnf:ro  # カスタム設定ファイルをマウント
+      - ./my.cnf:/etc/mysql/my.cnf:ro # カスタム設定ファイルをマウント
       - db-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: myapp_development
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-      MYSQL_UNIX_PORT: /var/run/mysqld/mysqld.sock
+      # MYSQL_UNIX_PORT: /var/run/mysqld/mysqld.sock
       # MYSQL_UNIX_PORT: /run/mysqld/mysqld.sock
+      MYSQL_UNIX_PORT: /tmp/mysql.sock
     ports:
       - "3306:3306"
     networks:
@@ -37,6 +38,7 @@ services:
 
 volumes:
   db-data:
+
 
 networks:
   myapp-network:

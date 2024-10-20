@@ -8,3 +8,5 @@
 # 「git add ファイル名」でファイルをステージング
 # 「git commit -m "コミット内容"」で変更内容をコミット
 # 「git push origin ブランチ名」反映させたいブランチに変更をプッシュ
+
+# test-goufのコンテナに接続させるとlocalhostが表示される

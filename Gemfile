@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# This migration creates the products table in the database.
+# It includes necessary columns and indexes as required.
+
 source 'https://rubygems.org'
 
 gem 'mysql2', '>= 0.5.0'
