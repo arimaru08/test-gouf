@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
+  resources :products, only: [:show]
+
   # get '/home' => 'HomeController#home'
 
   # Defines the root path route ("/")
