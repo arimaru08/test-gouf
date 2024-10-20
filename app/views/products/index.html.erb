@@ -16,6 +16,7 @@
     All Products
   </div>
   <div class="row">
+  <%# HINT:  @products.each_slice(2) do |product1, product2| みたいにコードを弄ってみて、見た目を変えるとかを試してみると、学びが深まる %>
     <% @products.each do |product| %>
       <%= link_to "http://example.com", class: "col-lg-4 col-md-6" do %>
         <div class="card">
