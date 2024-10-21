@@ -21,6 +21,11 @@
               <div class="card__total-price col-3 text-center">
                 <%= line_item.amount %> 円
               </div>
+              <div class="card__btn-trash col-1">
+                <%= link_to line_item_path(line_item), data: { turbo_method: :delete } do %>
+                <i class="far fa-trash-alt"></i>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>

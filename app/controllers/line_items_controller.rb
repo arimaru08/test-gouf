@@ -6,7 +6,7 @@ class LineItemsController < ApplicationController
 
     if @cart.products.include?(product)
       line_item = @cart.line_items.find_by(product_id: product)
-      line_item.quantity += 1
+      line_item.quantity += params[:quantity].to_i
     else
       line_item = LineItem.new
       line_item.cart = @cart
@@ -15,6 +15,12 @@ class LineItemsController < ApplicationController
     end
 
     line_item.save
+    redirect_to carts_path
+  end
+
+  def destroy
+    line_item = LineItem.find(params[:id])
+    line_item.destroy
     redirect_to carts_path
   end
 end
