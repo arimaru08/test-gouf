@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker compose exec web "$1"
+docker compose exec web "$@"
