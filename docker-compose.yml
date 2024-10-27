@@ -17,12 +17,41 @@ services:
     networks:
       - myapp-network
 
+  js:
+    build: '.'
+    command: bash -c "yarn build --watch"
+    volumes:
+      - .:/myapp
+      # - js-data:/myapp/node_modules
+      - myapp:/myapp
+      # - myapp:.
+    depends_on:
+      - web
+    networks:
+      - myapp-network
+    tty: true
+    stdin_open: true
+  css:
+    build: '.'
+    command: bash -c "yarn build:css --watch"
+    volumes:
+      - .:/myapp
+      # - js-data:/myapp/node_modules
+      - myapp:/myapp
+      # - myapp:.
+    depends_on:
+      - web
+    networks:
+      - myapp-network
+    tty: true
+    stdin_open: true
   web:
     # image: ruby:3.1
     build: '.'
     command: bash -c "rm -f tmp/pids/server.pid && bundle install && rails s -b '0.0.0.0'"
     volumes:
-      - .:/myapp
+      # - .:/myapp
+      - myapp:/myapp
     ports:
       - "3000:3000"
     environment:
@@ -37,7 +66,9 @@ services:
       - myapp-network
 
 volumes:
+  # js-data:
   db-data:
+  myapp:
 
 
 networks:
